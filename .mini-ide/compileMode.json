@@ -1,0 +1,9 @@
+{
+  "modes": [
+    {
+      "title": "pages/my/my",
+      "page": "pages/my/my",
+      "launchMode": "common"
+    }
+  ]
+}

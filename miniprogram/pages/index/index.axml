@@ -1,0 +1,31 @@
+<view class="main">
+  <view a:for="{{ ConTenttest }}" class="content">
+    <!--<image mode="aspectFill" src="/image/23.png" class="left" /> -->
+    <view class="title">新闻标题：这是一个很长很长很长很长很长的中文标题</view>
+    <view class="source">
+      <image mode="aspectFill" src="/image/head.png" class="source-head" />
+      <text class="source-name">新闻网</text>
+    </view>
+  </view>
+</view>
+
+
+<view class="tab-bar">
+  <view class="tab-sort" onTap="toSort">
+    <navigator url="/pages/sort/sort">
+      <image mode="aspectFill" src="/image/搜索.png" />
+    </navigator>
+  </view>
+  <view class="tab-list">
+    <view class="tab-item">
+      <navigator url="/pages/index/index">
+        <image mode="aspectFit" src="/image/主页1.png" class="tab-home" onTap="toHome" />
+      </navigator>
+    </view>
+    <view class="tab-item">
+      <navigator url="/pages/my/my">
+        <image mode="aspectFit" src="/image/个人1.png" class="tab-my" onTap="toMy" />
+      </navigator>
+    </view>
+  </view>
+</view>

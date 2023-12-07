@@ -1,0 +1,14 @@
+<view class="container">
+  <view class="search">
+    <view class="searchItem">
+      <image src="/image/搜索2.png"/>
+      <view class="line"></view>
+      <input class="input" type="search" value="{{inputValue}}" confirm-type="search" onFocus="onSearch" 
+        onConfirm="sortinput" />
+    </view>
+  </view>
+ </view>
+
+ <view class="rescontainer">
+   
+ </view>
