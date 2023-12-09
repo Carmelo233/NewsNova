@@ -1,0 +1,19 @@
+<view class="tab-bar">
+  <view class="tab-sort" onTap="toSort">
+    <navigator url="/pages/sort/sort">
+      <image mode="aspectFill" src="/image/搜索.png" />
+    </navigator>
+  </view>
+  <view class="tab-list">
+    <view class="tab-item">
+      <navigator url="/pages/index/index">
+        <image mode="aspectFit" src="/image/主页1.png" class="tab-home" onTap="toHome"/>
+      </navigator>
+    </view>
+    <view class="tab-item">
+      <navigator url="/pages/my/my">
+        <image mode="aspectFit" src="/image/个人1.png" class="tab-my" onTap="toMy"/>
+      </navigator>
+    </view>
+  </view>
+</view>
