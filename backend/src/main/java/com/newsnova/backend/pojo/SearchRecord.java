@@ -11,5 +11,4 @@ public class SearchRecord {
     private Integer id;
     private String uid;
     private String keyword;
-    private String engine;
 }

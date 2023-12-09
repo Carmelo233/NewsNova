@@ -13,9 +13,10 @@ public class BrowseRecord {
     private Integer id;
     private String uid;
     private String title;
-    private String abstract_text;
+    private String abstractText;
     private String url;
     private String engine;
     private boolean liked;
-    private LocalDateTime browsed_time;
+    private LocalDateTime browsedTime;
+    private LocalDateTime LikedTime;
 }
