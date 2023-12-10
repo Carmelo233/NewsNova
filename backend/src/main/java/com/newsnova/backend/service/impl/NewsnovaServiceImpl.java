@@ -1,5 +1,4 @@
 package com.newsnova.backend.service.impl;
-
 import com.alibaba.fastjson.JSONArray;
 import com.newsnova.backend.mapper.SearchMapper;
 import com.newsnova.backend.mapper.UserMapper;
@@ -7,10 +6,9 @@ import com.newsnova.backend.pojo.BrowseRecord;
 import com.newsnova.backend.pojo.SearchRecord;
 import com.newsnova.backend.pojo.User;
 import com.newsnova.backend.service.NewsnovaService;
-import com.newsnova.backend.utils.RestTemplateConfig;
+import com.newsnova.backend.config.RestTemplateConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,7 +28,6 @@ public class NewsnovaServiceImpl implements NewsnovaService {
     @Override
     public void addHistorySearch(String uid, String keyword){
         SearchRecord searchRecord = new SearchRecord();
-        //id先不设置默认自增（后续要改再看）
         searchRecord.setUid(uid);
         searchRecord.setKeyword(keyword);
         if(searchMapper.selectByKeyword(searchRecord) != null)
@@ -45,7 +42,15 @@ public class NewsnovaServiceImpl implements NewsnovaService {
     public List<SearchRecord> getHistorySearch(String uid){
         User user = new User();
         user.setUid(uid);
-        return searchMapper.selectHistorySearch(user);
+        List<SearchRecord> res = searchMapper.selectHistorySearch(user);
+        int l = res.size();
+        if(l>10){
+            SearchRecord firstRecord = res.get(l-1);
+            Integer firstId = firstRecord.getId();
+            //System.out.println(firstId);
+            searchMapper.deleteOverdueRecord(firstId,uid);
+        }
+        return res;
     }
 
     @Override
@@ -58,17 +63,8 @@ public class NewsnovaServiceImpl implements NewsnovaService {
     }
 
     @Override
-    public Integer addHistoryBrowse(String uid,String title,
-                                 String abstractText,
-                                 String url,String engine){
-        BrowseRecord browseRecord = new BrowseRecord();
-        browseRecord.setUid(uid);
-        browseRecord.setEngine(engine);
-        browseRecord.setLiked(false);
-        browseRecord.setUrl(url);
+    public Integer addHistoryBrowse(BrowseRecord browseRecord){
         browseRecord.setBrowsedTime(LocalDateTime.now());
-        browseRecord.setAbstractText(abstractText);
-        browseRecord.setTitle(title);
         searchMapper.insertHistoryBrowse(browseRecord);
         return browseRecord.getId();
     }
@@ -98,5 +94,15 @@ public class NewsnovaServiceImpl implements NewsnovaService {
         User user = new User();
         user.setUid(uid);
         return userMapper.selectLikedList(user);
+    }
+
+    public void deleteAll(String uid){
+        User user = new User();
+        user.setUid(uid);
+        searchMapper.deleteAllHistorySearch(user);
+    }
+
+    public void deleteHistory(Integer id){
+        searchMapper.deleteSearchRecord(id);
     }
 }

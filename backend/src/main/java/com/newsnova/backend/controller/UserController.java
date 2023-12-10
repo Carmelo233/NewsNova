@@ -15,12 +15,12 @@ public class UserController {
     @Autowired
     NewsnovaService newsnovaService;
 
-    @RequestMapping("/historyBrowse")
+    @RequestMapping("/get-history-browse")
     public Result historyBrowse(@RequestParam(value="uid") String uid){
         return Result.success(newsnovaService.getHistoryBrowse(uid));
     }
 
-    @RequestMapping("/likedList")
+    @RequestMapping("/get-liked-list")
     public Result likedList(@RequestParam(value="uid") String uid){
         return Result.success(newsnovaService.getLikedList(uid));
     }

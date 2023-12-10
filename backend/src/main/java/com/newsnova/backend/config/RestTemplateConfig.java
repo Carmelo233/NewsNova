@@ -1,4 +1,4 @@
-package com.newsnova.backend.utils;
+package com.newsnova.backend.config;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import org.springframework.stereotype.Component;
@@ -13,14 +13,18 @@ public class RestTemplateConfig {
     public JSONArray sendPost(String url,String val1,String val2) {
         String uri = url;
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
-        if(val1 != null ){
-        param.add("keyword", val1);}
+        if(val1 != null && val2 !=null){
+        param.add("keyword", val1);
         param.add("type", val2);
+        }else{
+            param.add("type", "1");
+        }
+
         System.out.println(param);
         String result = restTemplate.postForEntity
                 (uri, param, String.class).getBody();
-        JSONArray result_json = JSON.parseArray(result);
-        System.out.println(result_json);
-        return result_json;
+        JSONArray resultJson = JSON.parseArray(result);
+        System.out.println(resultJson);
+        return resultJson;
     }
 }

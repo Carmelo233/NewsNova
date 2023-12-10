@@ -11,9 +11,11 @@ public interface NewsnovaService {
     void addHistorySearch(String uid, String keyword);
     List<SearchRecord> getHistorySearch(String uid);
     void addUser(String uid);
-    Integer addHistoryBrowse(String uid,String title,String abstractText,String url,String engine);
+    Integer addHistoryBrowse(BrowseRecord browseRecord);
     void modifyLastBrowseTime(Integer id);
     void setLiked(Integer id);
     List<BrowseRecord> getHistoryBrowse(String uid);
     List<BrowseRecord> getLikedList(String uid);
+    void deleteAll(String uid);
+    void deleteHistory(Integer id);
 }

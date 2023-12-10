@@ -21,7 +21,7 @@
     </select>
 
     <select id="selectByKeyword" resultType="java.lang.Integer">
-        select id from history_search where uid=#{uid} and keyword=#{keyword}
+        select id from history_search where uid = #{uid} and keyword = #{keyword}
     </select>
 
     <insert id="insertHistoryBrowse" parameterType="com.newsnova.backend.pojo.BrowseRecord" useGeneratedKeys="true" keyProperty="id">
@@ -30,13 +30,22 @@
     </insert>
 
     <update id="updateBrowseTime">
-        update history_browse set browsed_time=#{localtime} where id=#{id}
+        update history_browse set browsed_time = #{localtime} where id = #{id}
     </update>
 
     <update id="modifyLiked">
-        update history_browse set liked=not liked where id=#{id}
+        update history_browse set liked = not liked where id = #{id}
     </update>
+
     <update id="modifyLikedTime">
-        update history_browse set liked_time=#{localtime} where id=#{id}
+        update history_browse set liked_time = #{localtime} where id = #{id}
     </update>
+
+    <delete id="deleteAllHistorySearch">
+        delete from history_search where uid=#{uid}
+    </delete>
+
+    <delete id="deleteOverdueRecord">
+        delete from history_search where uid=#{uid} and id &lt; #{firstId}
+    </delete>
 </mapper>

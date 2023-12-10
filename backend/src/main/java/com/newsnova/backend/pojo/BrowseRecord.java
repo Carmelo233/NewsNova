@@ -18,5 +18,5 @@ public class BrowseRecord {
     private String engine;
     private boolean liked;
     private LocalDateTime browsedTime;
-    private LocalDateTime LikedTime;
+    private LocalDateTime likedTime;
 }

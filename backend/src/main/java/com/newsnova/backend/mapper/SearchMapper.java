@@ -18,4 +18,6 @@ public interface SearchMapper {
     void updateBrowseTime(Integer id, LocalDateTime localtime);
     void modifyLiked(Integer id);
     void modifyLikedTime(Integer id,LocalDateTime localtime);
+    void deleteAllHistorySearch(User user);
+    void deleteOverdueRecord(Integer firstId, String uid);
 }
