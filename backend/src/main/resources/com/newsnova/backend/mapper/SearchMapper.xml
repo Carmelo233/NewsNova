@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newsnova.backend.mapper.SearchMapper">
+
+    <insert id="insertSearchRecord" parameterType="com.newsnova.backend.pojo.SearchRecord">
+        insert into history_search (uid, keyword) values (#{uid}, #{keyword})
+    </insert>
+
+    <delete id="deleteSearchRecord" parameterType="java.lang.Integer">
+        delete from history_search where id=#{id}
+    </delete>
+
+    <select id="selectHistorySearch" resultType="com.newsnova.backend.pojo.SearchRecord">
+        select id,uid,keyword
+        from history_search
+        where uid=#{uid}
+        order by id desc
+        limit 10
+    </select>
+
+    <select id="selectByKeyword" resultType="java.lang.Integer">
+        select id from history_search where uid = #{uid} and keyword = #{keyword}
+    </select>
+
+    <insert id="insertHistoryBrowse" parameterType="com.newsnova.backend.pojo.BrowseRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into history_browse(uid,title,abstract,url,engine,liked,browsed_time)
+        values(#{uid}, #{title}, #{abstractText}, #{url}, #{engine}, #{liked}, #{browsedTime})
+    </insert>
+
+    <update id="updateBrowseTime">
+        update history_browse set browsed_time = #{localtime} where id = #{id}
+    </update>
+
+    <update id="modifyLiked">
+        update history_browse set liked = not liked where id = #{id}
+    </update>
+
+    <update id="modifyLikedTime">
+        update history_browse set liked_time = #{localtime} where id = #{id}
+    </update>
+
+    <delete id="deleteAllHistorySearch">
+        delete from history_search where uid=#{uid}
+    </delete>
+
+    <delete id="deleteOverdueRecord">
+        delete from history_search where uid=#{uid} and id &lt; #{firstId}
+    </delete>
+</mapper>

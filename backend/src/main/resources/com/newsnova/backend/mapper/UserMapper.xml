@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newsnova.backend.mapper.UserMapper">
+    <resultMap id="browseRecordMap" type="com.newsnova.backend.pojo.BrowseRecord">
+        <id property="id" column="id"></id>
+        <result property="uid" column="uid"></result>
+        <result property="title" column="title"></result>
+        <result property="abstractText" column="abstract"></result>
+        <result property="url" column="url"></result>
+        <result property="engine" column="engine"></result>
+        <result property="liked" column="liked"></result>
+        <result property="browsedTime" column="browsed_time"></result>
+        <result property="likedTime" column="liked_time"></result>
+    </resultMap>
+
+    <insert id="insertUser" parameterType="com.newsnova.backend.pojo.User">
+        insert into user(uid) values (#{uid})
+    </insert>
+    <select id="selectUser"
+            resultType="com.newsnova.backend.pojo.User"
+            parameterType="com.newsnova.backend.pojo.User">
+        select * from user where uid = #{uid}
+    </select>
+    <select id="selectHistoryBrowse" resultMap="browseRecordMap">
+        select * from history_browse where uid = #{uid} order by browsed_time desc
+    </select>
+    <select id="selectLikedList" resultMap="browseRecordMap">
+        select * from history_browse where uid = #{uid} and liked=true order by liked_time desc
+    </select>
+</mapper>
