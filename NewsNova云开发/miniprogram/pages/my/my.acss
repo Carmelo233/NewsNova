@@ -1,0 +1,83 @@
+.my {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 100vh;
+  background-color: var(--BGcolor);
+}
+
+.userinfo {
+  display: flex;
+  flex-shrink: 0;
+  padding: 30rpx;
+  color: #FFF;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  background-color: #FFF;
+  align-self: center;
+}
+
+.userinfo text {
+  padding-top: 20rpx;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 100;
+}
+
+.function {
+  top: auto;
+  width: 100%;
+  height: 100vh;
+  background-color: aliceblue;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.shoucang{
+  /* List */
+  position: static;
+  width: 100%;
+  height: 142rpx;
+  /* 自动布局 */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  /* Inside Auto Layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 3px 0px;
+  border-bottom: 1rpx solid gray;
+}
+
+.shoucang image{
+  /* Button */
+  position: static;
+  width: 42rpx;
+  height: 42rpx;
+  /* 自动布局 */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 14rpx;
+  margin: 0rpx 30rpx;
+  border-radius: 16rpx;
+
+  /* Primary/Focus */
+  background: rgb(231, 240, 249);
+}
+
+.Taplogin{
+  width: 50%;
+  background-color: var(--BGcolor);
+  align-self: center;
+}

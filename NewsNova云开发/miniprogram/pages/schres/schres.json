@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "tab":"../../compontents/tab/tab"
+    }
+  ,
+  "styleIsolation": "apply-shared"
+}

@@ -1,0 +1,106 @@
+:host{
+  /* 全局css变量 */
+  --bg: #ebab70;
+}
+
+/* flex样式 */
+.flex-row{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.flex-colum{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.j_c{
+  justify-content: center;
+}
+
+/* tabbar样式 */
+.tabbar {
+  position: fixed;
+  width: 100%;
+  height: 120rpx;
+  bottom: 0;
+  backdrop-filter: blur(30rpx);
+  background-color:(0,0,0,0.65);
+  box-shadow: 0 2px 15px rgba(184, 184, 210, .5);
+  /* IOS */
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom) ;
+}
+
+.tabbar-item{
+  width: 33.33%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  padding-bottom: 20rpx;
+}
+
+.tabbar-item-icon {
+  width: 55rpx;
+  height: 55rpx;
+}
+
+.tabbar-item-icon-seach{
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.tabbar-item-text {
+  font-size: 30rpx;
+  color: #50baf1;
+  font-weight: bold;
+  position: absolute;
+  transform: translateY(80rpx);
+  /* 默认不显示 */
+  opacity: 0;
+}
+
+.tabbar-circle {
+  position: absolute;
+  width: 150rpx;
+  height: 150rpx;
+  background: #fff;
+  z-index: 1;
+  border-radius: 50%;
+  font-size: 45rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 128rpx;
+  top: -50rpx; 
+}
+
+.tabbar-circle::after {
+  content: '';
+  position: absolute;
+  width: 130rpx;
+  height: 130rpx;
+  background-color: #50baf1;
+  z-index: -1;
+  border-radius: 50%;
+  left: calc(50% - 65rpx);
+  top: calc(50% - 65rpx);
+}
+
+.tabbar-item.active::after {
+  content: '';
+  width: 100rpx;
+  height: 6rpx;
+  background: #50baf1;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.tabbar-item.active .tabbar-item-text {
+  opacity: 1;
+  transform: translateY(50rpx);
+
+}
