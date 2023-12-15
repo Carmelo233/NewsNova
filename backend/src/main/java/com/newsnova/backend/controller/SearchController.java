@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 
 @Slf4j
 @RequestMapping("/newsnova")
@@ -25,23 +27,27 @@ public class SearchController {
 
     @RequestMapping("/search")//新闻搜索接口
     public Result search(
-            @RequestParam(value= "uid") String uid,
+            HttpSession session,
             @RequestParam(value= "keyword") String keyword,
             @RequestParam(value= "engine") String engine) {
+        String uid = session.getAttribute("uid").toString();
         newsnovaService.addHistorySearch(uid,keyword);//添加历史搜索记录
-        //JSONArray searchRes = newsnovaService.callService(url, keyword,engine);
-        return Result.success();//searchRes
+        JSONArray searchRes = newsnovaService.callService(url, keyword,engine);
+        return Result.success(searchRes);//
     }
 
     @RequestMapping("/get-history-search")
-    public Result historySearch(@RequestParam(value= "uid") String uid){
+    public Result historySearch(HttpSession session){
+        String uid = session.getAttribute("uid").toString();
         return Result.success(newsnovaService.getHistorySearch(uid));//
     }
 
     @RequestMapping("/browse")
-    public Result browse(
+    public Result browse(HttpSession session,
             @RequestBody BrowseRecord browseRecord){
         if(browseRecord.getId()==0) {
+            String uid = session.getAttribute("uid").toString();
+            browseRecord.setUid(uid);
             Integer RecordId = newsnovaService.addHistoryBrowse(browseRecord);
             return Result.success(RecordId);
         }
@@ -58,7 +64,8 @@ public class SearchController {
     }
 
     @RequestMapping("/delete-all-record")
-    public Result deleteAllRecord(@RequestParam(value= "uid") String uid){
+    public Result deleteAllRecord(HttpSession session){
+        String uid = session.getAttribute("uid").toString();
         newsnovaService.deleteAll(uid);
         return Result.success();
     }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @Slf4j
 @RestController
 @RequestMapping("/newsnova")
@@ -20,7 +22,8 @@ public class HotPointController {
     private String url;
 
     @RequestMapping(value="/get-hot-point")//获取热榜数据
-    public Result getHotPoint(@RequestParam(value="uid")String uid){//请求携带data：uid
+    public Result getHotPoint(HttpSession session){//请求携带data：uid
+        String uid = session.getAttribute("uid").toString();
         newsnovaService.addUser(uid);//如果user不存在，添加user
         JSONArray hotpoint = newsnovaService.callService(url, null,null);//获取到热榜json数组
         return Result.success(hotpoint);
