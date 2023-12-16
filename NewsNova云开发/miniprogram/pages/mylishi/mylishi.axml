@@ -1,5 +1,0 @@
-<view class="main">
-  <button class="content" a:for={{ lishi }} a:key="item">
-      <view class="title">{{item.title}}</view>
-  </button>
-</view>

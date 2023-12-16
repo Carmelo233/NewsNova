@@ -1,5 +1,0 @@
-<view class="main">
-  <button class="content" a:for={{ shoucang }}>
-      <view class="title">新闻标题：这是一个很长很长很长很长很长的中文标题</view>
-  </button>
-</view>
