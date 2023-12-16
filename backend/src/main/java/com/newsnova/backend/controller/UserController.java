@@ -54,11 +54,6 @@ public class UserController {
         //request.setRefreshToken("201208134b203fe6c11548bcabd8da5bb087a83b");
         AlipaySystemOauthTokenResponse response = alipayClient.execute(request);
         System.out.println(response.getBody());
-        if (response.isSuccess()) {
-            System.out.println("调用成功");
-        } else {
-            System.out.println("调用失败");
-        }
         String uid = response.getOpenId();
         //String uid = response.getUserId();
         log.info(uid);
@@ -66,7 +61,13 @@ public class UserController {
         session.setAttribute("uid",uid);
         String sessionId = session.getId();
         log.info(sessionId);
-        return Result.success();
+        if (response.isSuccess()) {
+            System.out.println("调用成功");
+            return Result.success(uid);
+        } else {
+            System.out.println("调用失败");
+            return Result.error();
+        }
     }
 
     @RequestMapping("/get-history-browse")
