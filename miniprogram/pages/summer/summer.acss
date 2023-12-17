@@ -1,4 +1,5 @@
-.main {
+
+.main{
   width: 100%;
   padding: 40rpx;
   padding-bottom: 120rpx;
@@ -6,59 +7,54 @@
   border-top-left-radius: 50rpx;
   border-top-right-radius: 50rpx;
 
-  background-color: #F8F8FF;
 }
 
-.content {
+.content{
   /* Card For You1 */
-  width: 100%;
-  height: auto;
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0rpx 10rpx 100rpx rgba(0, 0, 0, 0.1);
-  border-radius: 30rpx;
-  margin-bottom: 30rpx;
+width: 100%;
 
-  box-sizing: border-box;
+height: auto;
+background: rgba(255, 255, 255, 1);
+box-shadow: 0rpx 10rpx 100rpx rgba(0, 0, 0,0.1);
+border-radius: 30rpx;
+margin-bottom: 30rpx;
+
+box-sizing: border-box;
 }
 
-.content .sumtitle {
+.content .sumtitle{
   font-size: 34rpx;
   font-weight: bolder;
   color: #413d3d;
-  padding: 10rpx 0 10rpx 20rpx;
+  padding: 30rpx 0 10rpx 20rpx;
 }
 
-.summaryPar {
-  padding: 0 30rpx 40rpx 30rpx;
-}
-
-.summary {
+.content .summary{
   background-color: #fbfbfb;
-  border-radius: 20rpx;
+  padding: 10rpx 10rpx;
+  margin: 0rpx 0rpx 20rpx 20rpx;
+  border-radius: 5rpx;
   color: rgb(0, 21, 51);
   font-size: 40rpx;
   text-indent: 80rpx;
-  -webkit-line-clamp: 2;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.content .source {
+.content .source{
   display: flex;
   flex-direction: row;
   /* justify-items:stretch ; */
-
+  
 }
 
 .source-title {
+  color: black;
+  background-color: white;
   font-size: larger;
   font-weight: bolder;
   justify-self: center;
   padding: 20rpx;
-  margin: 40rpx 0rpx 0rpx 0rpx;
-  color: black;
+  border-radius: 20rpx;
+  margin: 50rpx 0rpx;
 }
 
 .source-url {
@@ -72,13 +68,16 @@
   text-overflow: ellipsis;
 }
 
-.content image {
-  position: static;
-  right: 0;
+.collectimg{ 
   width: 70rpx;
   height: 70rpx;
-  /* 自动布局 */
-  margin: 20rpx 30rpx;
+  padding: 0,40rpx,40rpx,40rpx;
+}
+
+.parent{
+  display: flex;
+  justify-content: flex-end;
+  padding: 0,40rpx,40rpx,40rpx;
 }
 
 .allsummary {

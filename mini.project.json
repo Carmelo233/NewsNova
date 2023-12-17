@@ -1,8 +1,7 @@
 {
   "format": 2,
   "compileOptions": {
-    "component2": true,
-    "enableNodeModuleBabelTransform": true
+    "component2": true
   },
   "miniprogramRoot": "./miniprogram",
   "cloudbaseRoot": "cloud"

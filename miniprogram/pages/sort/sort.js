@@ -1,14 +1,20 @@
 Page({
   data: {
     lishi:[
-      '历史记录1',
-      '历史记录2',
-      '历史记录3',
-      '历史记录4',
-      '历史记录5',
-      '历史记录6XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-    ],
-    inputValue : ""
+      {
+        "id": 4,
+        "uid": "userid",
+        "keyword": "国庆节"
+      },
+      {
+        "id": 3,
+        "uid": "userid",
+        "keyword": "巴以冲突"
+      }],
+    inputValue : "",
+    engine : 0,
+    showEngineSelect: false, // 控制选择按钮框的显示
+    engines: ["百度", "谷歌", "必应"], // 搜索引擎选项列表
   },
   onLoad() {},
   onShow() {
@@ -18,17 +24,24 @@ Page({
       });
     }
   },
-  inputConfirm(e){
-    // console.log(e.detail.value);
+  cathchConfirm(e){
+    var cathchlishi = this.data.lishi[e.currentTarget.dataset.index];
+    // console.log(this.data.lishi[e.currentTarget.dataset.index]);
     this.setData({
-      inputValue: e.detail.value,
+      inputValue: cathchlishi.keyword,
     });
+    this.inputConfirm();
+  },
+
+  inputConfirm(){
+    var that = this;
     my.navigateTo({
-      url: '/pages/schres/schres?id=1',
+      url: '/pages/schres/schres',
       success: function(res) {
         // 通过 eventChannel 向 B 页面传送数据
-        res.eventChannel.emit('PageA_Data', { 
-          data: e.detail.value
+        res.eventChannel.emit('sort', { 
+          inputValue: that.data.inputValue,
+          engine: that.data.engine
         })
       }
   })
@@ -36,6 +49,18 @@ Page({
   bindKeyInput(e) {
     this.setData({
       inputValue: e.detail.value,
+    });
+  },
+  toggleEngineSelect() {
+    this.setData({
+      showEngineSelect: !this.data.showEngineSelect,
+    });
+  },
+  selectEngine(e) {
+    const index = e.currentTarget.dataset.index;
+    this.setData({
+      engine: index,
+      showEngineSelect: false,
     });
   },
 });

@@ -1,31 +1,44 @@
-<view class="main">
-  <view a:for="{{ ConTenttest }}" class="content">
+<!-- <view class="main">
+  <view a:for="{{ ConTenttest }}" a:for-item="item" a:for-index="index" class="content" catchTap="tourl" data-index="{{index}}" >
     <!--<image mode="aspectFill" src="/image/23.png" class="left" /> -->
-    <view class="title">新闻标题：这是一个很长很长很长很长很长的中文标题</view>
+    <!-- <view class="title">{{item.summary}}</view> -->
+      <!-- <view class="source"> -->
+      <!-- <image mode="aspectFill" src="/image/head.png" class="source-head" /> -->
+    <!-- <view class="source-name">{{item.url}}</view> -->
+      <!-- </view> -->
+  <!-- </view> -->
+<!-- </view> --> 
+
+<!-- <view class="main">
+  <view a:for="{{ ConTenttest }}" a:for-item="item" a:for-index="index" class="content" data-index="{{index}}">
     <view class="source">
-      <image mode="aspectFill" src="/image/head.png" class="source-head" />
-      <text class="source-name">新闻网</text>
+      <view class="source-title">title{{item.title}}</view>
+    </view>
+    <view class="sumtitle">摘要如下：</view>
+    <scroll-view class="summary" scroll-y="ture">{{item.summary}}</scroll-view>
+    <view class="">
+      <view class="sumtitle">来源:</view>
+      <view class="source-url"  catchTap="tourl" data-index="{{index}}" >{{item.url}}</view>
     </view>
   </view>
-</view>
-
-
-<view class="tab-bar">
-  <view class="tab-sort" onTap="toSort">
-    <navigator url="/pages/sort/sort">
-      <image mode="aspectFill" src="/image/搜索.png" />
-    </navigator>
-  </view>
-  <view class="tab-list">
-    <view class="tab-item">
-      <navigator url="/pages/index/index">
-        <image mode="aspectFit" src="/image/主页1.png" class="tab-home" onTap="toHome" />
-      </navigator>
+</view> -->
+<view class="main">
+  <view
+    a:for="{{ ConTenttest }}"
+    a:for-index="index"
+    a:for-item="item"
+    class="content"
+    catchTap="cathchConfirm"
+    data-index="{{index}}"
+  >
+    <view class="source">
+      <view class="source-title">{{item.title}}</view>
     </view>
-    <view class="tab-item">
-      <navigator url="/pages/my/my">
-        <image mode="aspectFit" src="/image/个人1.png" class="tab-my" onTap="toMy" />
-      </navigator>
+    <view class="sumtitle">摘要如下：</view>
+    <view class="summaryPar">
+      <view class="summary">
+        {{item.summary}}
+      </view>
     </view>
   </view>
 </view>

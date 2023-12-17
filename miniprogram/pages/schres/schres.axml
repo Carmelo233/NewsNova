@@ -1,14 +1,35 @@
-<view class="container">
-  <view class="search">
-    <view class="searchItem">
-      <image src="/image/搜索2.png"/>
-      <view class="line"></view>
-      <input class="input" type="search" value="{{inputValue}}" confirm-type="search" onFocus="onSearch" 
-        onConfirm="sortinput" />
+<!--<view class="container"><view class="search"><view class="searchItem"><image src="/image/seach2.png"/><view class="line"></view><input class="input" type="search" value="{{inputValue}}" confirm-type="search" onFocus="onSearch" 
+        onConfirm="sortinput" /></view></view></view> -->
+
+
+<view class="main">
+  <view class="content">
+    <!--<view class="source"> -->
+    <view class="allsource-title">总摘要：</view>
+    <!--<image mode="scaleToFill" src="{{item.liked ? '/image/collect2.png' : '/image/collect1.png'}}" catchTap="toggleCollect" data-index="{{index}}" /> -->
+    <!--</view> -->
+    <!--<view class="sumtitle">摘要如下：</view> -->
+    <view class="allsummary">{{reslist[listlen - 1].summary}}</view>
+  </view>
+
+  <view
+    a:for="{{ reslist }}"
+    a:for-index="index"
+    a:for-item="item"
+    a:if="{{ index < listlen-1 }}"
+    class="content"
+    catchTap="cathchConfirm"
+    data-index="{{index}}"
+  >
+    <view class="source">
+      <view class="source-title">{{item.title}}</view>
+      <!--<image mode="scaleToFill" src="{{item.liked ? '/image/collect2.png' : '/image/collect1.png'}}" catchTap="toggleCollect" data-index="{{index}}" /> -->
+    </view>
+    <view class="sumtitle">摘要如下：</view>
+    <view class="summaryPar">
+      <view class="summary">
+        {{item.summary}}
+      </view>
     </view>
   </view>
- </view>
-
- <view class="rescontainer">
-   
- </view>
+</view>
