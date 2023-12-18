@@ -1,8 +1,38 @@
-<view class="main">
-  <view class="tishi">
-    我的收藏
-  </view>
-  <button class="content" a:for={{ shoucang }}>
-      <view class="title">新闻标题：这是一个很长很长很长很长很长的中文标题</view>
+
+<!-- <view class="main">
+  <button class="content" a:for={{ shoucang }} a:for-item="item" a:for-index="index" data-index="{{index}}">
+      <view class="title">{{item.title}}</view>
+      <image mode="scaleToFill" src="/image/collect2.png" catchTap="outcollect"/>
   </button>
+</view> -->
+<!-- You can use bindtap instead of catchTap to let event propagation -->
+<!-- <view class="main">
+  <block a:for={{shoucang}} a:for-item="item" a:for-index="index">
+    <button  class="content" data-index="{{index}}" data-id="{{item.id}}">
+        <view class="title">{{item.title}}</view>
+        <image mode="scaleToFill" src="{{item.liked ? '/image/collect2.png' : '/image/collect1.png'}}" catchTap="toggleCollect" data-index="{{index}}" />
+    </button>
+  </block>
+</view> -->
+
+<view class="main">
+  <view
+    a:for="{{ shoucang }}"
+    a:if="{{ item.liked }}"
+    a:for-index="index"
+    a:for-item="item"
+    class="content"
+    catchTap="cathchConfirm"
+    data-index="{{index}}"
+  >
+    <view class="source">
+      <view class="source-title">{{item.title}}</view>
+    </view>
+    <view class="sumtitle">摘要如下：</view>
+    <view class="summaryPar">
+      <view class="summary">
+        {{item.abstractText}}
+      </view>
+    </view>
+  </view>
 </view>

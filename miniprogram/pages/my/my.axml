@@ -1,21 +1,33 @@
 <view class="my">
   <view class="userinfo">
-    <image mode="aspectFill" src="/image/head.png" />
+    <image mode="aspectFill" src={{avatar}} />
     <text>
-      {{username}}
+      {{nickName}}
     </text>
   </view>
   <view class="function">
     <navigator url="/pages/myshoucang/myshoucang">
       <view class="shoucang">
-        <image src="" />
+        <image src="/image/collect2.png" />
         <text>收藏</text>
       </view>
     </navigator>
     <navigator url="/pages/mylishi/mylishi">
       <view class="shoucang">
-        <image mode="scaleToFill" src="" />
+        <image mode="scaleToFill" src="/image/history2.png" />
         <text>历史</text>
       </view>
     </navigator>
+    <button 
+      a:if="{{ !islog }}"
+      class="Taplogin"
+      type="primary"
+      open-type="getAuthorize"
+      scope="userInfo"
+      onGetAuthorize="getOpenUserInfo"
+      onError="handleAuthError" 
+    >
+      请登录
+    </button>
   </view>
+</view>

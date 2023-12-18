@@ -1,8 +1,32 @@
-<view class="main">
-  <view class="tishi">
-    我的历史浏览
+<!-- <view class="remove" onTap="removeall">
+  <image mode="scaleToFill" src="/image/remove.png" />
+  <view>
+    删除全部
   </view>
-  <button class="content" a:for={{ shoucang }}>
-      <view class="title">新闻标题：这是一个很长很长很长很长很长的中文标题</view>
+</view> -->
+<!-- <view class="main">
+  <button class="content" a:for={{ lishi }} a:key="item">
+      <view class="title">{{item.title}}</view>
   </button>
+</view> -->
+
+<view class="main">
+  <view
+    a:for="{{ lishi }}"
+    a:for-index="index"
+    a:for-item="item"
+    class="content"
+    catchTap="cathchConfirm"
+    data-index="{{index}}"
+  >
+    <view class="source">
+      <view class="source-title">{{item.title}}</view>
+    </view>
+    <view class="sumtitle">摘要如下：</view>
+    <view class="summaryPar">
+      <view class="summary">
+        {{item.abstractText}}
+      </view>
+    </view>
+  </view>
 </view>

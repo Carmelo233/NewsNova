@@ -4,7 +4,7 @@
     <view class="tabbar-item flex-colum j_c" a:if="{{ index==1 }}" 
     data-url="{{item.pagePath}}" data-index="{{index}}" onTap="tap">
       <view class="tabbar-circle j_c flex-row">
-        <image mode="aspectFill" src="/image/搜索.png" class="tabbar-item-icon-seach"/>   
+        <image mode="aspectFill" src="/image/seach1.png" class="tabbar-item-icon-seach"/>   
       </view>
       <view class="tabbar-item-text">{{item.name}}</view>  
     </view>

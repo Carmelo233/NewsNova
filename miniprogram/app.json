@@ -5,12 +5,13 @@
     "pages/my/my",
     "pages/myshoucang/myshoucang",
     "pages/mylishi/mylishi",
-    "pages/schres/schres"
+    "pages/schres/schres",
+    "pages/webViewPage/webViewPage",
+    "pages/summer/summer"
   ],
   "window": {
     "defaultTitle": "NewsNova",
-    "titleBarColor": "#50baf1",
-    "backgroundColor": "#50baf1"
+    "titleBarColor": "#50baf1"
   },
   "tabBar": {
     "customize": true,

@@ -1,0 +1,16 @@
+<view class="main">
+  <view class="source-title">{{title}}</view>
+  <view class="content">
+   <view class="sumtitle">摘要如下：</view>
+    <view class="summary">{{summary}}</view>
+    <view class="">
+      <view class="sumtitle">来源:</view>
+      <view class="source-url"  catchTap="tourl" data-index="{{index}}" >{{url}}</view>
+    </view>
+    <view class="parent">
+      <image class="collectimg" mode="scaleToFill" src="{{liked ? '/image/collect2.png' : '/image/collect1.png'}}" 
+    catchTap="toggleCollect" data-index="{{index}}" />
+    </view>
+    
+  </view>
+</view>

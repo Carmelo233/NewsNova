@@ -1,17 +1,36 @@
 <view class="container">
   <view class="search">
     <view class="searchItem">
-      <image src="/image/搜索2.png"/>
+      <image src="/image/seach2.png" />
       <view class="line"></view>
-      <input class="input" value={{inputValue}} placeholder="试试输入任何你想了解" 
-            confirm-type="search" onConfirm="inputConfirm" onInput="bindKeyInput"/>
+      <input
+        class="input"
+        value={{inputValue}}
+        placeholder="试试输入任何你想了解"
+        confirm-type="search"
+        onConfirm="inputConfirm"
+        onInput="bindKeyInput"
+      />
+      <text>{{engines[engine]}}</text>
+    </view>
+  </view>
+  <view class="engineSelect" hidden="{{!showEngineSelect}}">
+    <view a:for="{{engines}}" class="engineItem" bindtap="selectEngine" data-index="{{index}}">
+      {{item}}
     </view>
   </view>
   <view class="lishiframe">
     <view class="lishicontainer">
       <text>历史记录</text>
-      <view a:for="{{lishi}}" a:key="id" class="lishicentent">
-        {{item}}
+      <view
+        a:for="{{lishi}}"
+        a:for-index="index"
+        a:for-item="item"
+        class="lishicentent"
+        catchTap="cathchConfirm"
+        data-index="{{index}}"
+      >
+        {{item.keyword}}
         <view class="line"></view>
       </view>
     </view>
