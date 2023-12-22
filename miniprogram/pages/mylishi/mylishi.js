@@ -34,20 +34,20 @@ Page({
     var that = this;
     // 使用my.request发送请求
     my.request({
-      url: 'http://localhost:9300/newsnova/get-history-browse',
+      url: 'http://112.74.176.236:9300/newsnova/get-history-browse',
       method: 'POST',
       success: function (res) {
         that.setData({
-          lishi: res.data
+          lishi: res.data.data
         })
       },
       fail: function (error) {
-        console.error('fail: ', JSON.stringify(error));
-      },
-      complete: function (res) {
         my.alert({
           content: "加载失败"
         })
+        console.error('fail: ', JSON.stringify(error));
+      },
+      complete: function (res) {
         my.hideLoading();
       },
     });
@@ -59,7 +59,7 @@ Page({
     // console.log(this.data.lishi[e.currentTarget.dataset.index]);
     var that = this;
     my.request({
-      url: 'http://localhost:9300/newsnova/browse',
+      url: 'http://112.74.176.236:9300/newsnova/browse',
       method: 'POST',
       data: {
         "uid": null,

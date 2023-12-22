@@ -81,3 +81,26 @@ page{
   width: 100%;
   background-color: #aaa;
 }
+
+.deleteallview {
+  display: flex;
+  font-size: 40rpx;
+  font-weight: bold;
+  align-items: center;
+}
+
+.deleteallview image {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: auto;
+}
+
+.delete-icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: auto; /* pushes the icon to the right */
+}
+
+.lishi-icon {
+ display: flex;
+}

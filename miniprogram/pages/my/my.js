@@ -3,7 +3,7 @@ const app = getApp();
 Page({
   data: {
     openid: '',
-    nickName: '请登录/注册',
+    nickName: '请登录',
     avatar: "/image/head.png",
     islog: false,
   },
@@ -20,33 +20,6 @@ Page({
     });
   },
 
-  // 函数：检查登录状态
-  // checkLoginStatus(token) {
-  //   // 使用保存的token去获取用户信息
-  //   my.request({
-  //     url: '您的服务端地址，用以校验token有效性并获取用户信息',
-  //     headers: {
-  //       'Authorization': `Bearer ${token}`
-  //     },
-  //     success: (res) => {
-  //       if (res.statusCode === 200) {
-  //         // Token有效，设置用户信息
-  //         this.setUserinfo(res.data);
-  //       } else {
-  //         // Token无效，清除本地存储的登录态然后重新登录
-  //         my.removeStorage({
-  //           key: 'userToken',
-  //           success: () => {
-  //             this.tryToLogin();
-  //           }
-  //         });
-  //       }
-  //     },
-  //     fail: () => {
-  //       this.handleLoginError();
-  //     },
-  //   });
-  // },
 
   // 处理登录错误
   handleLoginError() {
