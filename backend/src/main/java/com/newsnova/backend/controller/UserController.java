@@ -1,6 +1,4 @@
 package com.newsnova.backend.controller;
-
-import com.alipay.api.diagnosis.DiagnosisUtils;
 import com.newsnova.backend.pojo.Result;
 import com.newsnova.backend.service.NewsnovaService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,15 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.CertAlipayRequest;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayConfig;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.alipay.api.request.AlipaySystemOauthTokenRequest;
-import com.alipay.api.FileItem;
-import java.util.Base64;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -39,6 +32,7 @@ public class UserController {
     @RequestMapping("/pass-code")
     public Result passCode(@RequestParam(value="auth_code") String authCode,
                            HttpServletRequest httpRequest) throws AlipayApiException{
+        log.info("成功请求pass-code接口——1/3");
         AlipayConfig alipayConfig = new AlipayConfig();
         alipayConfig.setServerUrl("https://openapi.alipay.com/gateway.do");
         alipayConfig.setAppId(appId);
@@ -51,35 +45,51 @@ public class UserController {
         AlipaySystemOauthTokenRequest request = new AlipaySystemOauthTokenRequest();
         request.setCode(authCode);
         request.setGrantType("authorization_code");
-        //request.setRefreshToken("201208134b203fe6c11548bcabd8da5bb087a83b");
+        //request.setRefreshToken("201208134b203fe6c11548bcabd8da5bb087a83b");//刷新码
         AlipaySystemOauthTokenResponse response = alipayClient.execute(request);
-        System.out.println(response.getBody());
-        String uid = response.getOpenId();
-        //String uid = response.getUserId();
-        log.info(uid);
-        HttpSession session = httpRequest.getSession(true);
-        session.setAttribute("uid",uid);
-        String sessionId = session.getId();
-        log.info(sessionId);
         if (response.isSuccess()) {
-            System.out.println("调用成功");
+            log.info("获取userid成功，输出response信息——2/3");
+            System.out.println(response.getBody());
+            String uid = response.getOpenId();
+            log.info("uid为："+uid);
+            HttpSession session = httpRequest.getSession(true);
+            log.info("成功创建会话——3/3");
+            session.setAttribute("uid",uid);
+            String sessionId = session.getId();
+            log.info(sessionId);
             return Result.success(uid);
         } else {
-            System.out.println("调用失败");
+            log.info("获取userid失败");
             return Result.error();
         }
     }
 
     @RequestMapping("/get-history-browse")
     public Result historyBrowse(HttpSession session){
-        String uid = session.getAttribute("uid").toString();
-        log.info(uid);
-        return Result.success(newsnovaService.getHistoryBrowse(uid));
+        log.info("请求get-history-browse成功");
+        String sessionId = session.getId();
+        if(sessionId==null){
+            return Result.error("登录状态为空");
+        }
+        else{
+            String uid = session.getAttribute("uid").toString();
+            log.info("uid为："+uid);
+            return Result.success(newsnovaService.getHistoryBrowse(uid));
+        }
+
     }
 
     @RequestMapping("/get-liked-list")
     public Result likedList(HttpSession session){
-        String uid = session.getAttribute("uid").toString();
-        return Result.success(newsnovaService.getLikedList(uid));
+        log.info("请求get-liked-list成功");
+        String sessionId = session.getId();
+        if(sessionId==null){
+            return Result.error("登录状态为空");
+        }
+        else{
+            String uid = session.getAttribute("uid").toString();
+            log.info("uid为："+uid);
+            return Result.success(newsnovaService.getLikedList(uid));
+        }
     }
 }
