@@ -6,5 +6,6 @@ Page({
     this.setData({
       url: options.url
     });
+    console.log("open url:",options);
   }
 });

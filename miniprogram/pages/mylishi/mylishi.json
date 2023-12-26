@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "styleIsolation": "apply-shared"
+  "styleIsolation": "apply-shared",
+  "defaultTitle": "历史浏览"
 }

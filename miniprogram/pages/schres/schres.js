@@ -42,6 +42,11 @@ Page({
       })
     });
     console.log("获取seach页面传来的参数：",that.data);
+
+    // 设置导航栏标题
+    my.setNavigationBar({
+      title: this.data.inputValue
+    })
   },
   onShow() {
     // 自定义的bar
@@ -85,18 +90,6 @@ Page({
         my.hideLoading();
       },
     });
-  },
-  tourl(event) {
-    console.log(event);
-    const index = event.currentTarget.dataset.index;
-    const url = this.data.reslist[index].url;
-    // 使用encodeURIComponent确保URL参数没有问题
-    const encodedUrl = encodeURIComponent(url);
-
-    // 跳转至webViewPage，并传递url参数
-    my.navigateTo({
-      url: "../webViewPage/webViewPage?url=" + encodedUrl
-    })
   },
   toggleCollect: function (e) {
     var index = e.currentTarget.dataset.index;
@@ -159,7 +152,7 @@ Page({
         res.eventChannel.emit('seachres', {
           summary: cathchres.summary,
           title: cathchres.title,
-          url: cathchres.title,
+          url: cathchres.url,
           id: 0,
           index: index,
           liked: cathchres.liked
@@ -167,6 +160,7 @@ Page({
       }
     })
   },
+
   changeColl(_liked) {
     var _reslist = this.data.reslist;
     _reslist[this.data.chickindex].liked = _liked;

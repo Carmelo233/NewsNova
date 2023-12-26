@@ -89,7 +89,7 @@ Page({
         res.eventChannel.emit('seachres', {
           summary: cathchlishi.abstractText,
           title: cathchlishi.title,
-          url: cathchlishi.title,
+          url: cathchlishi.url,
           id: cathchlishi.id,
           index: index,
           liked: cathchlishi.liked

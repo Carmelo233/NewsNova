@@ -28,7 +28,10 @@ Page({
       }]
   },
   onLoad() {
+    this.login();
+    this.get_hot();
   },
+
   onShow() {
     // 自定义的bar
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
@@ -36,6 +39,38 @@ Page({
         selected: 0,
       });
     }
+
+  },
+
+  onPullDownRefresh() {
+    this.get_hot();
+  },
+ 
+  login(){
+    console.log("调用 login");
+    my.getAuthCode({
+      scopes: 'auth_base',
+      success: (res) => {
+        // console.log("得到authCode:", res.authCode);
+        my.request({
+          url: 'http://112.74.176.236:9300/newsnova/pass-code',
+          data: {
+            auth_code: res.authCode,
+          },
+          success: (res) => {
+            console.log("登录成功",res);
+          },
+          fail: (err) => {
+            console.error('fail: ', JSON.stringify(err));
+          }
+        });
+      }
+    });
+  },
+
+
+  get_hot() {
+    console.log("调用get_hot");
     //获取热榜数据
     my.showLoading({
       content: '加载中...',
@@ -44,7 +79,6 @@ Page({
     var that = this;
     // 使用my.request发送请求
     my.request({
-      timeout: 120000,
       url: 'http://112.74.176.236:9300/newsnova/get-hot-point',
       method: 'POST',
       // 设置请求头部
@@ -78,6 +112,7 @@ Page({
       },
     });
   },
+
   cathchConfirm(e) {
     var index = e.currentTarget.dataset.index;
     var cathchConTenttest = this.data.ConTenttest[index];
@@ -122,6 +157,7 @@ Page({
       }
     })
   },
+
   changeColl(_liked) {
     var _ConTenttest = this.data.ConTenttest;
     _ConTenttest[this.data.chickIndex].liked = _liked;

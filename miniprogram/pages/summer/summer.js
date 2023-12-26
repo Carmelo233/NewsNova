@@ -21,7 +21,7 @@ Page({
         liked: data.liked
       })
     });
-
+    console.log(this.data);
   },
   toggleCollect: function (e) {
     this.setData({
@@ -57,5 +57,16 @@ Page({
       }
     })
     // console.log(this.data.shoucang);
+  },
+  
+  tourl(event) {
+    const url = this.data.url;
+    // 使用encodeURIComponent确保URL参数没有问题
+    const encodedUrl = encodeURIComponent(url);
+
+    // 跳转至webViewPage，并传递url参数
+    my.navigateTo({
+      url: "../webViewPage/webViewPage?url=" + encodedUrl
+    })
   },
 });
