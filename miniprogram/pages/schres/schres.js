@@ -1,7 +1,7 @@
 Page({
   data: {
     chickindex: -1,
-    engine: null,
+    engine: "0",
     listlen: 5,
     inputValue: "",
     reslist: [{
@@ -36,41 +36,17 @@ Page({
     const eventChannel = that.getOpenerEventChannel();
     eventChannel.on('sort', data => {
       console.log(data);
-      my.request({
-        url: '搜索接口',
-        method: 'POST',
-        data: {
-          keyword: that.data.inputValue,
-          engine: 1,
-        },
-        dataType: 'json',
-        success: function (res) {
-          that.setData({
-            reslist: res.data,
-          })
-          // 给数组每个对象加个liked&&id 属性
-          var list = that.data.reslist;
-          list.forEach(item => {
-            item.liked = false;
-            item.id = 0
-          });
-          that.setData({
-            reslist: list,
-            listlen: list.length//是否需要？
-          })
-        },
-        fail: function (error) {
-          console.error('fail: ', JSON.stringify(error));
-          my.alert({
-            title: '错误',
-            content: '搜索失败'
-          });
-        },
-        complete: function (res) {
-          my.hideLoading();
-        },
-      });
+      that.setData({
+        engine: data.engine,
+        inputValue: data.inputValue
+      })
     });
+    console.log("获取seach页面传来的参数：",that.data);
+
+    // 设置导航栏标题
+    my.setNavigationBar({
+      title: this.data.inputValue
+    })
   },
   onShow() {
     // 自定义的bar
@@ -79,18 +55,41 @@ Page({
         selected: 0,
       });
     }
-  },
-  tourl(event) {
-    console.log(event);
-    const index = event.currentTarget.dataset.index;
-    const url = this.data.reslist[index].url;
-    // 使用encodeURIComponent确保URL参数没有问题
-    const encodedUrl = encodeURIComponent(url);
-
-    // 跳转至webViewPage，并传递url参数
-    my.navigateTo({
-      url: "../webViewPage/webViewPage?url=" + encodedUrl
-    })
+    //获取搜索结果
+    var that = this;
+    my.request({
+      url: 'http://112.74.176.236:9300/newsnova/search',
+      method: 'POST',
+      data: {
+        keyword: "巴以冲突",
+        engine: "0",
+      },
+      success: function (res) {
+        that.setData({
+          reslist: res.data,
+        })
+        // 给数组每个对象加个liked&&id 属性
+        var list = that.data.reslist;
+        list.forEach(item => {
+          item.liked = false;
+          item.id = 0
+        });
+        that.setData({
+          reslist: list,
+          listlen: list.length//是否需要？
+        })
+      },
+      fail: function (error) {
+        console.error('fail: ', JSON.stringify(error));
+        my.alert({
+          title: '错误',
+          content: '搜索失败'
+        });
+      },
+      complete: function (res) {
+        my.hideLoading();
+      },
+    });
   },
   toggleCollect: function (e) {
     var index = e.currentTarget.dataset.index;
@@ -121,7 +120,7 @@ Page({
     // console.log(this.data.lishi[e.currentTarget.dataset.index]);
     var that = this;
 
-
+    //浏览接口
     my.request({
       url: 'http://localhost:9300/newsnova/browse',
       method: 'POST',
@@ -131,12 +130,12 @@ Page({
         "abstractText": cathchres.summary,
         "url": cathchres.url,
         "engine": this.data.engine,
-        "id": 0
+        "id": cathchres.id
       },
       // 更新浏览状态
       success: function (res) {
         var _reslist = that.data.reslist;
-        _reslist[index].id = res.data;
+        _reslist[index].id = res.data.data;
         that.setData({
           reslist: _reslist
         })
@@ -153,7 +152,7 @@ Page({
         res.eventChannel.emit('seachres', {
           summary: cathchres.summary,
           title: cathchres.title,
-          url: cathchres.title,
+          url: cathchres.url,
           id: 0,
           index: index,
           liked: cathchres.liked
@@ -161,12 +160,13 @@ Page({
       }
     })
   },
+
   changeColl(_liked) {
     var _reslist = this.data.reslist;
     _reslist[this.data.chickindex].liked = _liked;
     this.setData({
       reslist: _reslist
     })
-    console.log("更改上一页参数：",this.data.reslist);
+    console.log("更改上一页参数：", this.data.reslist);
   }
 });

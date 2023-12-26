@@ -1,27 +1,31 @@
 <view class="container">
   <view class="search">
     <view class="searchItem">
-      <image src="/image/seach2.png" />
-      <view class="line"></view>
+      <picker
+        mode="selector"
+        value="{{index}}"
+        range="{{engines}}"
+        range-key="name"
+        onChange="chooseEngine"
+      >
+        <image src="/image/seach2.png" catchTap="showOptions" />
+      </picker>
       <input
         class="input"
         value={{inputValue}}
-        placeholder="试试输入任何你想了解"
+        placeholder="点击放大镜选择搜索引擎"
         confirm-type="search"
         onConfirm="inputConfirm"
         onInput="bindKeyInput"
       />
-      <text>{{engines[engine]}}</text>
-    </view>
-  </view>
-  <view class="engineSelect" hidden="{{!showEngineSelect}}">
-    <view a:for="{{engines}}" class="engineItem" bindtap="selectEngine" data-index="{{index}}">
-      {{item}}
     </view>
   </view>
   <view class="lishiframe">
     <view class="lishicontainer">
-      <text>历史记录</text>
+      <view class="deleteallview">
+        <view> 历史记录</view>
+        <image mode="scaleToFill" src="/image/remove.png" catchTap="removeall" />
+      </view>
       <view
         a:for="{{lishi}}"
         a:for-index="index"
@@ -30,7 +34,15 @@
         catchTap="cathchConfirm"
         data-index="{{index}}"
       >
-        {{item.keyword}}
+        <view class="lishi-icon">
+          <view> {{item.keyword}}</view>
+          <image
+            src="/image/delete.png"
+            class="delete-icon"
+            catchTap="deleteItem"
+            data-index="{{index}}"
+          />
+        </view>
         <view class="line"></view>
       </view>
     </view>

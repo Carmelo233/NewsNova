@@ -21,7 +21,7 @@ Page({
     var that = this;
     // 使用my.request发送请求
     my.request({
-      url: 'your-backend-api-url/collections',
+      url: 'http://112.74.176.236:9300/newsnova/get-liked-list',
       method: 'POST',
       success: function (res) {
         that.setData({

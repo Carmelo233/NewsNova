@@ -28,7 +28,50 @@ Page({
       }]
   },
   onLoad() {
+    this.login();
+    this.get_hot();
+  },
 
+  onShow() {
+    // 自定义的bar
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0,
+      });
+    }
+
+  },
+
+  onPullDownRefresh() {
+    this.get_hot();
+  },
+ 
+  login(){
+    console.log("调用 login");
+    my.getAuthCode({
+      scopes: 'auth_base',
+      success: (res) => {
+        // console.log("得到authCode:", res.authCode);
+        my.request({
+          url: 'http://112.74.176.236:9300/newsnova/pass-code',
+          data: {
+            auth_code: res.authCode,
+          },
+          success: (res) => {
+            console.log("登录成功",res);
+          },
+          fail: (err) => {
+            console.error('fail: ', JSON.stringify(err));
+          }
+        });
+      }
+    });
+  },
+
+
+  get_hot() {
+    console.log("调用get_hot");
+    //获取热榜数据
     my.showLoading({
       content: '加载中...',
     }
@@ -36,8 +79,13 @@ Page({
     var that = this;
     // 使用my.request发送请求
     my.request({
-      url: 'http://localhost:9300/newsnova/get-hot-point',
+      url: 'http://112.74.176.236:9300/newsnova/get-hot-point',
       method: 'POST',
+      // 设置请求头部
+      headers :{
+        'Content-Type': 'application/json', // 通常对于POST请求需要设置此内容类型
+        'Cookie': 'JSESSIONID=70BA9FACA4A839A62AD40E40288EC7ED'
+      },
       success: function (res) {
         that.setData({
           ConTenttest: res.data
@@ -50,7 +98,7 @@ Page({
         });
         this.setData({
           reslist: list,
-          listlen: list.length//是否需要？
+          listlen: list.length //是否需要？
         })
       },
       fail: function (error) {
@@ -64,14 +112,7 @@ Page({
       },
     });
   },
-  onShow() {
-    // 自定义的bar
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 0,
-      });
-    }
-  },
+
   cathchConfirm(e) {
     var index = e.currentTarget.dataset.index;
     var cathchConTenttest = this.data.ConTenttest[index];
@@ -79,7 +120,7 @@ Page({
     var that = this;
     //浏览接口
     my.request({
-      url: 'http://localhost:9300/newsnova/browse',
+      url: 'http://112.74.176.236:9300/newsnova/browse',
       method: 'POST',
       data: {
         "uid": null,
@@ -116,6 +157,7 @@ Page({
       }
     })
   },
+
   changeColl(_liked) {
     var _ConTenttest = this.data.ConTenttest;
     _ConTenttest[this.data.chickIndex].liked = _liked;

@@ -5,11 +5,12 @@ App({
     openid: '',
   },
 
- async onLaunch(options) {
-
+  onLaunch(options) {
+    
   },
 
   onShow(options) {
-   
+    
+
   }
 });

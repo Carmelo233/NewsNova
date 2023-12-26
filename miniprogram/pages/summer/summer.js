@@ -21,7 +21,7 @@ Page({
         liked: data.liked
       })
     });
-
+    console.log(this.data);
   },
   toggleCollect: function (e) {
     this.setData({
@@ -31,19 +31,20 @@ Page({
     // 上一页面栈
     var prevPage = pages[pages.length - 2];
     // 上以页面的Data数据
-    console.log(prevPage.data); 
+    console.log(prevPage.data);
     // 调用上一页函数,更新liked状态
     prevPage.changeColl(this.data.liked);
     // 收藏/取消收藏
+    var that = this;
     my.request({
-      url: 'http://localhost:9300/newsnova/set-like',
+      url: 'http://112.74.176.236:9300/newsnova/set-like',
       method: 'POST',
       data: {
-        id:this.data.id
+        id: this.data.id
       },
       success: function (res) {
         this.setData({
-          liked: !this.data.liked,
+          liked: !that.data.liked,
         });
         var pages = getCurrentPages();
         // 上一页面栈
@@ -56,5 +57,16 @@ Page({
       }
     })
     // console.log(this.data.shoucang);
+  },
+  
+  tourl(event) {
+    const url = this.data.url;
+    // 使用encodeURIComponent确保URL参数没有问题
+    const encodedUrl = encodeURIComponent(url);
+
+    // 跳转至webViewPage，并传递url参数
+    my.navigateTo({
+      url: "../webViewPage/webViewPage?url=" + encodedUrl
+    })
   },
 });
