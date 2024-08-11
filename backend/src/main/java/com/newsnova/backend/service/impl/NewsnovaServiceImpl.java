@@ -7,12 +7,14 @@ import com.newsnova.backend.pojo.SearchRecord;
 import com.newsnova.backend.pojo.User;
 import com.newsnova.backend.service.NewsnovaService;
 import com.newsnova.backend.config.RestTemplateConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 public class NewsnovaServiceImpl implements NewsnovaService {
     @Autowired
     public RestTemplateConfig restTemplateConfig;

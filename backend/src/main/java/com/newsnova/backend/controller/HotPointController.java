@@ -23,10 +23,19 @@ public class HotPointController {
 
     @RequestMapping(value="/get-hot-point")//获取热榜数据
     public Result getHotPoint(HttpSession session){//请求携带data：uid
-        String uid = session.getAttribute("uid").toString();
-        newsnovaService.addUser(uid);//如果user不存在，添加user
-        JSONArray hotpoint = newsnovaService.callService(url, null,null);//获取到热榜json数组
-        return Result.success(hotpoint);
+        String sessionId = session.getId();
+        if(sessionId==null){
+            return Result.error("登录状态为空");
+        }
+        else {
+            log.info("请求get-hot-point成功——1/3");
+            String uid = session.getAttribute("uid").toString();
+            log.info("sessionId:"+sessionId);
+            newsnovaService.addUser(uid);//如果user不存在，添加user
+            log.info("添加userid进数据库操作成功——2/3");
+            JSONArray hotpoint = newsnovaService.callService(url, null, null);//获取到热榜json数组
+            log.info("获取热榜成功——3/3");
+            return Result.success(hotpoint);
+        }
     }
-
 }

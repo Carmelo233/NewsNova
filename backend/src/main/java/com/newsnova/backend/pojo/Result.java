@@ -18,8 +18,10 @@ public class Result {
     public static Result error(){
         return new Result(0,"请求失败",null);
     }
+    public static Result error(String msg){return new Result(0,msg,null);}
     //成功响应 携带数据返回
     public static Result success(Object res){
         return new Result(1,"成功发送请求",res);
     }
+
 }
